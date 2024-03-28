@@ -107,5 +107,30 @@ namespace TheComputerShop.Controllers
         }
         #endregion
 
+        #region DeleteUser
+        [Authorize(Roles = "admin")]
+        [HttpDelete("{userId:int}", Name = "DeleteUser")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult DeleteUser(int userId)
+        {
+
+            if (!_usRepo.ExistUser(userId))
+            {
+                return NotFound();
+            }
+
+            var user = _usRepo.GetUsuario(Convert.ToString(userId));
+
+
+            return NoContent();
+        }
+
+
+        #endregion
+
     }
 }

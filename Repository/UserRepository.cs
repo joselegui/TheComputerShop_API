@@ -124,5 +124,10 @@ namespace TheComputerShop.Repository
 
             return new UsuarioDatosDto();
         }
+
+        public bool ExistUser(int id)
+        {
+            return _db.AppUser.Any(u => u.Id.Equals(id));
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace TheComputerShop.Repository.IRepository
         AppUser GetUsuario(string usuarioId);
 
         bool IsUniqueUser(string nombre);
+
+        bool ExistUser(int id);
         
         Task<UsuarioLoginRespuestaDto> Login(UsuarioLoginDto usuarioLoginDto);
 
