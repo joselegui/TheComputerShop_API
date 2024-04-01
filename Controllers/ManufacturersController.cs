@@ -54,7 +54,7 @@ namespace TheComputerShop.Controllers
         {
             var itemsManufacture = _manufacturersRepository.GetManufacturers(manufactureId);
 
-            if(itemsManufacture == null)
+            if (itemsManufacture == null)
             {
                 return BadRequest();
             }
@@ -88,9 +88,9 @@ namespace TheComputerShop.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (_manufacturersRepository.ExistManufacture(manufacturersDto.Name)) 
+            if (_manufacturersRepository.ExistManufacture(manufacturersDto.Name))
             {
-                ModelState.AddModelError("","La marca ya existe");
+                ModelState.AddModelError("", "La marca ya existe");
 
                 return StatusCode(400, ModelState);
             }
@@ -99,12 +99,12 @@ namespace TheComputerShop.Controllers
 
             if (!_manufacturersRepository.CreateManufacture(manufacture))
             {
-                ModelState.AddModelError("",$"Something went wrong while saving {manufacture.Name}");
+                ModelState.AddModelError("", $"Something went wrong while saving {manufacture.Name}");
 
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetManufacture", new { manufactureId = manufacture.Id}, manufacture);
+            return CreatedAtRoute("GetManufacture", new { manufactureId = manufacture.Id }, manufacture);
 
         }
         #endregion
@@ -120,8 +120,8 @@ namespace TheComputerShop.Controllers
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
 
-            if (manufacturersDto == null || manufacturersId != manufacturersDto.Id) 
-            { 
+            if (manufacturersDto == null || manufacturersId != manufacturersDto.Id)
+            {
                 return BadRequest(ModelState);
             }
 
@@ -129,7 +129,7 @@ namespace TheComputerShop.Controllers
 
             if (!_manufacturersRepository.UpdateManufacture(manufacturers))
             {
-                ModelState.AddModelError("",$"Algo salio mal al actualizar la Marca {manufacturersDto.Name}");
+                ModelState.AddModelError("", $"Algo salio mal al actualizar la Marca {manufacturersDto.Name}");
             }
 
             return NoContent();
@@ -143,7 +143,7 @@ namespace TheComputerShop.Controllers
         [HttpGet("Search")]
         public IActionResult Search(string name)
         {
-            try 
+            try
             {
                 var result = _manufacturersRepository.SearchManufacturers(name.Trim());
 

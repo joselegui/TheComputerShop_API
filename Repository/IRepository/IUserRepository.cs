@@ -17,6 +17,7 @@ namespace TheComputerShop.Repository.IRepository
         Task<UsuarioLoginRespuestaDto> Login(UsuarioLoginDto usuarioLoginDto);
 
         Task<UsuarioDatosDto> Registro(UsuarioRegistroDto usuarioRegistroDto);
+        bool DeleteUser(AppUser itemUsuario);
 
         //Task<bool> UpdateUser(Usuario usuario);
     }
