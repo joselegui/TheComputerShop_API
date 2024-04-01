@@ -87,7 +87,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region GetUsuarios
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -107,26 +107,54 @@ namespace TheComputerShop.Controllers
         }
         #endregion
 
+        #region GetUsuario
+        [Authorize(Roles = "admin")]
+        [HttpGet("{usuarioId}", Name = "GetUsuario")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetUsuario(string usuarioId)
+        {
+            var itemUsuario = _usRepo.GetUsuario(usuarioId);
+
+            if (itemUsuario == null)
+            {
+                return NotFound();
+            }
+
+            var itemUsuarioDto = _mapper.Map<UsuarioDto>(itemUsuario);
+
+            return Ok(itemUsuarioDto);
+        }
+        #endregion
+
         #region DeleteUser
         [Authorize(Roles = "admin")]
-        [HttpDelete("{userId:int}", Name = "DeleteUser")]
+        [HttpDelete("{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult DeleteUser(int userId)
+        public IActionResult DeleteUser(string userId)
         {
 
-            if (!_usRepo.ExistUser(userId))
+            var itemUsuario = _usRepo.GetUsuario(userId);
+
+            if (itemUsuario == null)
             {
                 return NotFound();
             }
 
-            var user = _usRepo.GetUsuario(Convert.ToString(userId));
+            if (!_usRepo.DeleteUser(itemUsuario))
+            {
+                ModelState.AddModelError("", $"Algo salio mal a Eliminar el Usuario {itemUsuario.Name}");
+                return StatusCode(500, ModelState);
+            }
 
-
-            return NoContent();
+            return Ok();
         }
 
 
