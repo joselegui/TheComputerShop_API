@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -123,6 +124,18 @@ namespace TheComputerShop.Repository
             }
 
             return new UsuarioDatosDto();
+        }
+
+        public bool DeleteUser(AppUser itemUsuario)
+        {
+            _db.AppUser.Remove(itemUsuario);
+
+            return Save();
+        }
+
+        public bool Save()
+        {
+            return _db.SaveChanges() >= 0 ? true : false;
         }
     }
 }
