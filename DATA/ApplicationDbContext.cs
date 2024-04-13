@@ -17,6 +17,7 @@ namespace TheComputerShop.DATA
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new UserRoleConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
         }
 
         public DbSet<Articles> Articles { get; set; }
