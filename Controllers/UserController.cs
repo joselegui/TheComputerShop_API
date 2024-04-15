@@ -87,7 +87,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region GetUsuarios
-        [AllowAnonymous]
+        [Authorize(Roles = "Super Administrator, Administrator, The seller")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -108,7 +108,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region GetUsuario
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator, Administrator")]
         [HttpGet("{usuarioId}", Name = "GetUsuario")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -131,7 +131,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region DeleteUser
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator")]
         [HttpDelete("{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

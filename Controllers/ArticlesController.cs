@@ -68,7 +68,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region CreateArticles
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator, Administrator")]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(ArticleDto))]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -106,7 +106,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region UpdatePatchArticle
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator, Administrator")]
         [HttpPatch("{articleId:int}", Name = "UpdatePatchArticle")]
         [ProducesResponseType(201, Type = typeof(ArticleDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -134,7 +134,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region DeleteArticles
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator")]
         [HttpDelete("{categoriaId:int}", Name = "BorrarCategoria")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
