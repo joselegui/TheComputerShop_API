@@ -68,7 +68,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region CreateManufacturers
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator, Administrator")]
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(ManufacturersDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -110,7 +110,7 @@ namespace TheComputerShop.Controllers
         #endregion
 
         #region UpdateManufacturers
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Super Administrator, Administrator")]
         [HttpPatch("{manufacturersId:int}", Name = "UpdateManufacturers")]
         [ProducesResponseType(201, Type = typeof(ManufacturersDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

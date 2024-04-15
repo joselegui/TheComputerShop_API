@@ -111,13 +111,12 @@ namespace TheComputerShop.Repository
             if (resultado.Succeeded)
             {
                 //Solo la primera vez, y es para crear los roles
-                if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
+                if (!_roleManager.RoleExistsAsync("Super Administrator").GetAwaiter().GetResult())
                 {
-                    await _roleManager.CreateAsync(new IdentityRole("admin"));
-                    await _roleManager.CreateAsync(new IdentityRole("registrado"));
+                    await _roleManager.CreateAsync(new IdentityRole(usuarioRegistroDto.Role));
                 }
 
-                await _userManager.AddToRoleAsync(usuario, "admin");
+                await _userManager.AddToRoleAsync(usuario, usuarioRegistroDto.Role);
                 var usuarioRetornado = _db.AppUser.FirstOrDefault(u => u.UserName == usuarioRegistroDto.NombreUsuario);
 
                 return _mapper.Map<UsuarioDatosDto>(usuarioRetornado);
