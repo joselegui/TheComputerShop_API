@@ -4,7 +4,7 @@ namespace TheComputerShop.Models
 {
     public class UserAspRol : IdentityRole
     {
-
+        
     }
 }
 

@@ -13,6 +13,7 @@ namespace TheComputerShop.ComputerShopMapper
             CreateMap<AppUser, UsuarioDto>().ReverseMap();
             CreateMap<Articles, ArticleDto>().ReverseMap();
             CreateMap <Manufacturers, ManufacturersDto>().ReverseMap();
+            CreateMap <UserAspRol, RolesDto>().ReverseMap();
         }
     }
 }
