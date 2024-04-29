@@ -34,6 +34,8 @@ builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
 builder.Services.AddScoped<IManufacturersRepository, ManufacturersRepository>();
 
+builder.Services.AddScoped <IRolesRepository, RolesRepository>();
+
 #endregion
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
